@@ -76,22 +76,24 @@ export default class SimpleCalendar extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, nextState) {
-    if(nextProps.value !== nextState.prevValue) {
+    const value = nextProps.value;
+    const prevValue = nextState.prevValue;
+    if((typeof value._isValid === "undefined" || value._isValid) && (value !== prevValue)) {
       // this.cursorStart = undefined;
-      if(nextProps.value && !nextState.isFromDateTextChange) {
-        let date = DateUtils.toMoment(nextProps.value).format(nextState.formatter);
-        if(nextProps.showMinguoDate) {
+      if(value && !nextState.isFromDateTextChange) {
+        let date = DateUtils.toMoment(value).format(nextState.formatter);
+        if(nextProps.useMinguoDate) {
           date = DateUtils.toMinguoDate(date);
         }
         return {
           [nextProps.name]: nextState.formatInputString(date),
-          prevValue: nextProps.value,
+          prevValue: value,
           isFromDateTextChange: false,
         }
-      } else if(!nextProps.value) {
+      } else if(!value) {
         return {
           [nextProps.name]: nextState.formatInputString(nextState.formatter),
-          prevValue: nextProps.value,
+          prevValue: value,
           isFromDateTextChange: false,
         }
       }
