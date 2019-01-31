@@ -8,7 +8,7 @@
   "jsnext:main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidhsusl/simple-calendar.git"
+    "url": "https://github.com/davidhsusl/tw-simple-calendar.git"
   },
   "dependencies": {
     "moment": "^2.20.1",
